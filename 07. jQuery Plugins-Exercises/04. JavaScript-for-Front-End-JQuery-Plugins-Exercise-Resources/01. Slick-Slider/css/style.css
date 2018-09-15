@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Gaegu');
+header {
+    width: 100%;
+    text-align: center;
+    font-family: 'Gaegu', cursive;
+}
+
+header h1 {
+    font-size: 70px;
+}
+
+img {
+    max-width: 80%;
+}
+
+.cats {
+    width: 60%;
+    margin: auto;
+}
+
+.slick-dots {
+    width: 90%;
+}
+
+.slick-prev:before {
+    color: black;
+}
+
+.slick-next:before {
+    color: black;
+    right: 25px;
+}
+
+.slick-next {
+    right: 8px;
+}
+
+.slick-prev {
+    left: -55px;
+}
+
+body>section>ul>li.slick-active {
+    opacity: 0.5;
+}
+
+.slick-dots li button:before {
+    font-size: 10px;
+    line-height: 60px;
+}
+
+.slick-active {
+    opacity: 0.5;
+}
+
+.slick-current {
+    opacity: 1;
+}

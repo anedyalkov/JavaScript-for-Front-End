@@ -1,0 +1,159 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bus Stop</title>
+    <style>
+        #stopName {
+            font-size: 1.5em;
+            font-weight: 400;
+            padding: 0.25em;
+            background-color: aquamarine;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+    <div id="stopInfo" style="width:20em">
+        <div>
+            <label for="stopId">Stop ID: </label>
+            <input id="stopId" type="text">
+            <input id="submit" type="button" value="Check" onclick="getInfo()">
+        </div>
+        <div id="result">
+            <div id="stopName"></div>
+            <ul id="buses"></ul>
+        </div>
+    </div>
+    <script>
+        function getInfo() {
+            let currentId = $('#stopId').val();
+
+            let url = `https://judgetests.firebaseio.com/businfo/${currentId}.json`;
+            $.ajax({
+                url,
+                success,
+                error
+            });
+
+
+            $('#stopName').empty();
+            function success(res) {
+
+                $('#stopName').append(res.name);
+
+                let extractedObject = Object.entries(res.buses);
+                $('#buses').empty();
+                for (data of extractedObject) {
+                    $('#buses').append($('<li>').text(`Bus ${data[0]} arrives  in ${data[1]} minutes`));
+                }
+
+            }
+
+            function error(err) {
+                $('#stopName').append('Error');
+            }
+        }
+    </script>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bus Schedule</title>
+    <style>
+        #schedule {
+            text-align: center;
+            width: 400px;
+        }
+
+        input {
+            width: 120px;
+        }
+
+        #info {
+            background-color: aquamarine;
+            border: 1px solid black;
+            margin: 0.25em;
+        }
+
+        .info {
+            font-size: 1.5em;
+            padding: 0.25em;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+    <div id="schedule">
+        <div id="info">
+            <span class="info">Not Connected</span>
+        </div>
+        <div id="controls">
+            <input id="depart" value="Depart" type="button" onclick="result.depart()">
+            <input id="arrive" value="Arrive" type="button" onclick="result.arrive()" disabled="true">
+        </div>
+    </div>
+    <script>
+        function solve() {
+           
+            let url = `https://judgetests.firebaseio.com/schedule/`;
+            let currentStop = 'depot';
+            let nextStop = 'depot';
+            function depart() {
+                $('#depart').attr("disabled", 'true');
+                $('#arrive').attr("disabled", false);
+                $.ajax({
+                    url: url + currentStop + '.json',
+                    success,
+                    error
+                });
+                function success(res) {
+                    nextStop = res.next;
+                    $('#info').find('span').text(`Next stop ${res.name}`);
+                }
+                function error(err) {
+                    $('#arrive').attr("disabled", true);
+                    $('#depart').attr("disabled", true);
+                    $('#info').find('span').text(`Error`);
+
+                }
+            }
+            function arrive() {
+                $('#arrive').attr("disabled", true);
+                $('#depart').attr("disabled", false);
+                $.ajax({
+                    url: url + currentStop + '.json',
+                    success,
+                    error
+
+                });
+                function success(res) {
+                    $('#info').find('span').text(`Next stop ${res.name}`);
+                    currentStop = nextStop;
+                }
+                function error(err) {
+                    $('#arrive').attr("disabled", true);
+                    $('#depart').attr("disabled", true);
+                    $('#info').find('span').text(`Error`);
+
+                }
+
+            }
+            return {
+                depart,
+                arrive
+            };
+        }
+        
+    </script>
+</body>
+
+</html>

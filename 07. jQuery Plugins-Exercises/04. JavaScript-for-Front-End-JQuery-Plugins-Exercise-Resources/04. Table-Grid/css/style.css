@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=News+Cycle');
+body {
+    font-family: 'News Cycle', sans-serif;
+}
+
+header {
+    text-align: center;
+    margin: 15px;
+}
+
+thead {
+    background: #AAAAAA;
+}
+
+tfoot {
+    background: #AAAAAA;
+}
+
+#table_filter>label>input[type="search"] {
+    border-radius: 15px;
+    outline: none;
+    height: 38px;
+    border:2px solid #D4D4D4;
+}
+
+#table_filter {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+}
+
+#table_length {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+#table_wrapper {
+    border: 2px solid #D4D4D4;
+    border-radius: 8px;
+}
+
+#table_info {
+    margin-left: 20px;
+    margin-bottom: 30px;
+}
+
+#table_paginate {
+    margin-top: 10px;
+}
